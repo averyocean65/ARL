@@ -1,4 +1,5 @@
-﻿using BepInEx;
+﻿using ARL.Upgrades;
+using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class ARL : BaseUnityPlugin
     private ManualLogSource _logger => base.Logger;
     internal Harmony? Harmony { get; set; }
 
+    private GameObject _upgradeManager = null!;
+
     private void Awake()
     {
         Instance = this;
@@ -24,6 +27,10 @@ public class ARL : BaseUnityPlugin
         Patch();
 
         Logger.LogInfo($"{Info.Metadata.GUID} v{Info.Metadata.Version} has loaded!");
+
+        _upgradeManager = new GameObject("Custom Upgrade Manager");
+        _upgradeManager.hideFlags = HideFlags.HideAndDontSave;
+        _upgradeManager.AddComponent<UpgradeManager>();
     }
 
     internal void Patch()
