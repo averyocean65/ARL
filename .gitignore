@@ -430,3 +430,6 @@ FodyWeavers.xsd
 
 # JetBrains IDEs
 .idea/
+
+# Ignore ArlUnityTests because it has priority
+!Tests/ArlUnityTests
