@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: -1558716956, guid: 73aedab7fec78b248b5e7f3bd6a0742b, type: 3}
   m_Name: Upgrade Test
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 0}
+  _prefab: {fileID: 114113914193948405, guid: 088e0a0ef63870d47a05752eaa387711, type: 3}
