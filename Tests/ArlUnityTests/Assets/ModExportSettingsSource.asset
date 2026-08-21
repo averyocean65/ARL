@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: '-'
   m_EditorClassIdentifier: 
   _mod: {fileID: 11400000, guid: 869e740bda16a51429583969cc892189, type: 2}
-  _extraFiles: []
+  _extraFiles:
+  - {fileID: 102900000, guid: 8e46e783a8560ed478e2f4d180a1dedf, type: 3}
+  - {fileID: 102900000, guid: bf33ec1713a13fe41bccc3c4e86a96c9, type: 3}
   _extraBundleFiles: []
 --- !u!114 &11400000
 MonoBehaviour:
