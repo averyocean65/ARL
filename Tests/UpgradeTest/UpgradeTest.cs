@@ -7,6 +7,7 @@ using UnityEngine;
 namespace UpgradeTest;
 
 [BepInPlugin("averyocean65.UpgradeTest", "UpgradeTest", "1.0")]
+[BepInDependency("averyocean65.ARL", BepInDependency.DependencyFlags.HardDependency)]
 public class UpgradeTest : BaseUnityPlugin {
 	internal static UpgradeTest Instance { get; private set; } = null!;
 	internal new static ManualLogSource Logger => Instance._logger;
