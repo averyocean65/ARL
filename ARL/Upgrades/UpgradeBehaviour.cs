@@ -8,10 +8,15 @@ namespace ARL.Upgrades;
 
 public abstract class UpgradeBehaviour : MonoBehaviour {
 	protected ItemToggle _toggle;
+	protected ItemUpgrade _itemUpgrade;
+	
 	private FieldInfo _photonIdField;
 
 	protected virtual void Awake() {
 		_toggle = GetComponent<ItemToggle>();
+		_itemUpgrade = GetComponent<ItemUpgrade>();
+		_itemUpgrade.upgradeEvent.AddListener(Upgrade);
+		
 		GetDataFields();
 	}
 

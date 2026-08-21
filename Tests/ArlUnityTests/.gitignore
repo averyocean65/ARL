@@ -79,3 +79,7 @@ crashlytics-build.properties
 *.dll*
 /AssetRipper/*
 /AssetRipperOutput/*
+
+# Custom DLLs
+!**/UpgradeTest.dll
+!**/ARL.dll
