@@ -7,6 +7,7 @@ using UnityEngine;
 namespace ARL;
 
 [BepInPlugin("averyocean65.ARL", "ARL", "1.0")]
+[BepInDependency("REPOLib", BepInDependency.DependencyFlags.HardDependency)]
 public class ARL : BaseUnityPlugin
 {
     internal static ARL Instance { get; private set; } = null!;
