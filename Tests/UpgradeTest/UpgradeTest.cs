@@ -24,8 +24,8 @@ internal class UpgradeTest : BaseUnityPlugin {
 		Patch();
 
 		Logger.LogInfo($"{Info.Metadata.GUID} v{Info.Metadata.Version} has loaded!");
-
-		UpgradeManager.Instance.RegisterUpgrade("averyocean65.upgradetest.testupgrade", "Test Upgrade");
+		
+		RegisteredUpgrades.InitUpgrades();
 	}
 
 	internal void Patch() {

@@ -21,6 +21,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 	
 	private void Start() {
 		ARL.Logger.LogInfo($"Spawned {nameof(UpgradeManager)}.");
+		GetFields();
 	}
 
 	private LocalizedAsset GetLocalizedString(string upgradeGuid) {
