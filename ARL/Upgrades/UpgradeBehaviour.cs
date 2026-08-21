@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ARL.Upgrades;
 
-public class UpgradeBehaviour : MonoBehaviour {
+public abstract class UpgradeBehaviour : MonoBehaviour {
 	protected ItemToggle _toggle;
 	private FieldInfo _photonIdField;
 
@@ -30,7 +30,10 @@ public class UpgradeBehaviour : MonoBehaviour {
 		catch {
 			steamId = SteamClient.SteamId.ToString();
 		}
-		
-		// TODO: call function to perform the upgrade in REPO's logic
+
+		UpgradeManager.PerformUpgrade(steamId, GetUpgradeInfo(), PerformUpgrade);
 	}
+	
+	protected abstract CustomUpgrade GetUpgradeInfo();
+	protected abstract void PerformUpgrade(bool isInLevel);
 }

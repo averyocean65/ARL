@@ -29,6 +29,13 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 		return asset;
 	}
 	
+	/// <summary>
+	/// Registers an upgrade in the StatsManager.
+	/// Never call this in a frequently called function like implementations of <see cref="UpgradeBehaviour.GetUpgradeInfo()"/>
+	/// </summary>
+	/// <param name="upgradeGuid">The GUID of the upgrade, recommended format is "author.mod.title"</param>
+	/// <param name="displayName">The name that should show up next to the player map in-game when consuming the upgrade.</param>
+	/// <returns>A structure with all the necessary information regarding the custom upgrade.</returns>
 	public CustomUpgrade RegisterUpgrade(string upgradeGuid, string displayName) {
 		CustomUpgrade output = new CustomUpgrade() {
 			Guid = upgradeGuid,
@@ -42,5 +49,9 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 		
 		DictOfDicts.Add(upgradeGuid, output.UpgradeDictionary);
 		return output;
+	}
+
+	internal static int PerformUpgrade(string steamId, CustomUpgrade upgradeInfo, Action<bool> onPerformUpgrade, int value = 1) {
+		return 0; // TODO
 	}
 }
