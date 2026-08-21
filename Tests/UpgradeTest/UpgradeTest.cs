@@ -24,8 +24,6 @@ internal class UpgradeTest : BaseUnityPlugin {
 		Patch();
 
 		Logger.LogInfo($"{Info.Metadata.GUID} v{Info.Metadata.Version} has loaded!");
-		
-		RegisteredUpgrades.InitUpgrades();
 	}
 
 	internal void Patch() {

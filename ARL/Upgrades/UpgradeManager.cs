@@ -56,6 +56,14 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 	}
 
 	internal static int PerformUpgrade(string steamId, CustomUpgrade upgradeInfo, Action<bool> onPerformUpgrade, int value = 1) {
-		return 0; // TODO
+		int upgradeCount = upgradeInfo.UpgradeDictionary.TryGetValue(steamId, out var count) ? count : 0;
+		if (value == 0) {
+			return upgradeCount;
+		}
+
+		upgradeInfo.UpgradeDictionary[steamId] += value;
+		onPerformUpgrade.Invoke(SemiFunc.RunIsLevel());
+		
+		return upgradeInfo.UpgradeDictionary[steamId];
 	}
 }
