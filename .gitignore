@@ -432,4 +432,4 @@ FodyWeavers.xsd
 .idea/
 
 # Ignore ArlUnityTests because it has priority
-!Tests/ArlUnityTests
+!Tests/ArlUnityTests/
