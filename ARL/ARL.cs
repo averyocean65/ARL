@@ -21,14 +21,12 @@ internal class ARL : BaseUnityPlugin
     {
         Instance = this;
         
-        // Prevent the plugin from being deleted
-        gameObject.transform.parent = null;
-        gameObject.hideFlags = HideFlags.HideAndDontSave;
+        DontDestroyOnLoad(this);
 
         Patch();
 
         Logger.LogInfo($"{Info.Metadata.GUID} v{Info.Metadata.Version} has loaded!");
-
+        
         _upgradeManager = new GameObject("Custom Upgrade Manager");
         _upgradeManager.hideFlags = HideFlags.HideAndDontSave;
         _upgradeManager.AddComponent<UpgradeManager>();

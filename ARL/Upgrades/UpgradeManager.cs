@@ -15,11 +15,14 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 		(SortedDictionary<string, Dictionary<string, int>>)_dictOfDictsField.GetValue(StatsManager.instance);
 	
 	private void GetFields() {
-		_dictOfDictsField = AccessTools.Field(typeof(SortedDictionary<string, Dictionary<string, int>>),
-			"dictionaryOfDictionaries");
+		_dictOfDictsField = AccessTools.Field(typeof(StatsManager), "dictionaryOfDictionaries");
 	}
-	
-	private void Start() {
+
+	protected override void Awake() {
+		base.Awake();
+		
+		DontDestroyOnLoad(this);
+		
 		ARL.Logger.LogInfo($"Spawned {nameof(UpgradeManager)}.");
 		GetFields();
 	}
