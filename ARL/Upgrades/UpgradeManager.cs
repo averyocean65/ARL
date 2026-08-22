@@ -27,12 +27,6 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 		ARL.Logger.LogInfo($"Spawned {nameof(UpgradeManager)}.");
 		GetFields();
 	}
-
-	private LocalizedAsset GetLocalizedString(string upgradeGuid) {
-		LocalizedAsset asset = ScriptableObject.CreateInstance<LocalizedAsset>();
-		asset.stringReference = new LocalizedString(Constants.UpgradeTableGuid, upgradeGuid);
-		return asset;
-	}
 	
 	/// <summary>
 	/// Registers or fetches an upgrade in the StatsManager.
