@@ -5,6 +5,7 @@ using ARL.Utils;
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.Localization;
+using UnityEngine.SceneManagement;
 
 namespace ARL.Upgrades;
 
@@ -27,7 +28,19 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 		ARL.Logger.LogInfo($"Spawned {nameof(UpgradeManager)}.");
 		GetFields();
 	}
-	
+
+	private void Start() {
+		SceneManager.sceneLoaded += (arg0, mode) => {
+			foreach (var kvp in DictOfDicts) {
+				if (!kvp.Key.StartsWith(Constants.UpgradeGuidPrefix)) {
+					continue;
+				}
+				
+				ARL.Logger.LogInfo("Upgrade Key: " + kvp.Key);
+			}
+		};
+	}
+
 	/// <summary>
 	/// Registers or fetches an upgrade in the StatsManager.
 	/// </summary>
@@ -35,18 +48,21 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 	/// <param name="displayName">The name that should show up next to the player map in-game when consuming the upgrade.</param>
 	/// <returns>A structure with all the necessary information regarding the custom upgrade.</returns>
 	public CustomUpgrade RegisterOrFetchUpgrade(string upgradeGuid, string displayName) {
-		upgradeGuid = $"playerUpgrade_{upgradeGuid}"; // required so R.E.P.O shows the upgrade in the upgrade list... thanks semiwork.
+		string patchedUpgradeGuid = $"{Constants.UpgradeGuidPrefix}{upgradeGuid}"; // required so R.E.P.O shows the upgrade in the upgrade list... thanks semiwork.
+		if (upgradeGuid.StartsWith(Constants.UpgradeGuidPrefix)) {
+			patchedUpgradeGuid = upgradeGuid;
+		}
 		
-		if (_registeredUpgrades.TryGetValue(upgradeGuid, out var upgrade)) {
+		if (_registeredUpgrades.TryGetValue(patchedUpgradeGuid, out var upgrade)) {
 			return upgrade;
 		}
 
 		Dictionary<string, int> upgradeDict = new Dictionary<string, int>();
-		if(DictOfDicts.TryGetValue(upgradeGuid, out var dict)) {
+		if(DictOfDicts.TryGetValue(patchedUpgradeGuid, out var dict)) {
 			upgradeDict = dict;
 		}
 		else {
-			DictOfDicts.Add(upgradeGuid, upgradeDict);
+			DictOfDicts.Add(patchedUpgradeGuid, upgradeDict);
 		}
 		
 		CustomUpgrade output = new CustomUpgrade {
@@ -59,9 +75,9 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 			}
 		};
 
-		StatsManager.instance.upgradesInfo.TryAdd(upgradeGuid, output.UpgradeInfo);
+		StatsManager.instance.upgradesInfo.TryAdd(patchedUpgradeGuid, output.UpgradeInfo);
 		
-		_registeredUpgrades.Add(upgradeGuid, output);
+		_registeredUpgrades.Add(patchedUpgradeGuid, output);
 		return output;
 	}
 

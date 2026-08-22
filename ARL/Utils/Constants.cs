@@ -2,5 +2,5 @@
 
 public static class Constants {
 	public const string GuidBase = "com.averyocean65.";
-	public const string UpgradeTableGuid = GuidBase + "localization.upgrades";
+	public const string UpgradeGuidPrefix = "playerUpgrade_ArlCustom_";
 }

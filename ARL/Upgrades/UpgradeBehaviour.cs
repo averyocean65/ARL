@@ -46,5 +46,9 @@ public abstract class UpgradeBehaviour : MonoBehaviour {
 		return UpgradeManager.Instance.RegisterOrFetchUpgrade(guid, displayName);
 	}
 	
+	/// <summary>
+	/// Gets called when an upgrade is applied, or when a new scene is loaded.
+	/// </summary>
+	/// <param name="isInLevel"></param>
 	protected abstract void PerformUpgrade(bool isInLevel);
 }
