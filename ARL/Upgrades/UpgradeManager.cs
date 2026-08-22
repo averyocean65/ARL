@@ -30,8 +30,7 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 
 	private LocalizedAsset GetLocalizedString(string upgradeGuid) {
 		LocalizedAsset asset = ScriptableObject.CreateInstance<LocalizedAsset>();
-		// asset.stringReference = new LocalizedString(Constants.UpgradeTableGuid, upgradeGuid);
-		asset = StatsManager.instance.localizedUpgradeDeathHeadBattery; // test
+		asset.stringReference = new LocalizedString(Constants.UpgradeTableGuid, upgradeGuid);
 		return asset;
 	}
 	
@@ -43,6 +42,8 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 	/// <param name="displayName">The name that should show up next to the player map in-game when consuming the upgrade.</param>
 	/// <returns>A structure with all the necessary information regarding the custom upgrade.</returns>
 	public CustomUpgrade RegisterUpgrade(string upgradeGuid, string displayName) {
+		upgradeGuid = $"playerUpgrade_{upgradeGuid}"; // required so R.E.P.O shows the upgrade in the upgrade list... thanks semiwork.
+		
 		if (_registeredUpgrades.TryGetValue(upgradeGuid, out var upgrade)) {
 			return upgrade;
 		}
@@ -61,11 +62,12 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 			UpgradeDictionary = upgradeDict,
 			UpgradeInfo = new StatsManager.UpgradeInfo {
 				displayName = displayName,
-				displayNameLocalized = GetLocalizedString(upgradeGuid)
+				displayNameLocalized = null
 			}
 		};
 
 		StatsManager.instance.upgradesInfo.TryAdd(upgradeGuid, output.UpgradeInfo);
+		ARL.Logger.LogInfo("UpgradeInfo: " + StatsManager.instance.upgradesInfo[upgradeGuid].displayName);
 		
 		_registeredUpgrades.Add(upgradeGuid, output);
 		return output;
