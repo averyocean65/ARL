@@ -45,18 +45,22 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 		if (_registeredUpgrades.TryGetValue(upgradeGuid, out var upgrade)) {
 			return upgrade;
 		}
+
+		Dictionary<string, int> upgradeDict = new Dictionary<string, int>();
+		if(!DictOfDicts.TryAdd(upgradeGuid, upgradeDict)) {
+			upgradeDict = DictOfDicts[upgradeGuid];
+		}
 		
-		CustomUpgrade output = new CustomUpgrade() {
+		CustomUpgrade output = new CustomUpgrade {
 			Guid = upgradeGuid,
 			DisplayName = displayName,
-			UpgradeDictionary = new Dictionary<string, int>(),
-			UpgradeInfo = new StatsManager.UpgradeInfo() {
+			UpgradeDictionary = upgradeDict,
+			UpgradeInfo = new StatsManager.UpgradeInfo {
 				displayName = displayName,
 				displayNameLocalized = GetLocalizedString(upgradeGuid)
 			}
 		};
 		
-		DictOfDicts.Add(upgradeGuid, output.UpgradeDictionary);
 		_registeredUpgrades.Add(upgradeGuid, output);
 		return output;
 	}
