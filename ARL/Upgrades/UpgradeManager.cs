@@ -67,7 +67,6 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 		};
 
 		StatsManager.instance.upgradesInfo.TryAdd(upgradeGuid, output.UpgradeInfo);
-		ARL.Logger.LogInfo("UpgradeInfo: " + StatsManager.instance.upgradesInfo[upgradeGuid].displayName);
 		
 		_registeredUpgrades.Add(upgradeGuid, output);
 		return output;
