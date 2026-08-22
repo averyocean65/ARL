@@ -30,7 +30,8 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 
 	private LocalizedAsset GetLocalizedString(string upgradeGuid) {
 		LocalizedAsset asset = ScriptableObject.CreateInstance<LocalizedAsset>();
-		asset.stringReference = new LocalizedString(Constants.UpgradeTableGuid, upgradeGuid);
+		// asset.stringReference = new LocalizedString(Constants.UpgradeTableGuid, upgradeGuid);
+		asset = StatsManager.instance.localizedUpgradeDeathHeadBattery; // test
 		return asset;
 	}
 	
@@ -47,8 +48,11 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 		}
 
 		Dictionary<string, int> upgradeDict = new Dictionary<string, int>();
-		if(!DictOfDicts.TryAdd(upgradeGuid, upgradeDict)) {
-			upgradeDict = DictOfDicts[upgradeGuid];
+		if(DictOfDicts.TryGetValue(upgradeGuid, out var dict)) {
+			upgradeDict = dict;
+		}
+		else {
+			DictOfDicts.Add(upgradeGuid, upgradeDict);
 		}
 		
 		CustomUpgrade output = new CustomUpgrade {
@@ -60,6 +64,8 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 				displayNameLocalized = GetLocalizedString(upgradeGuid)
 			}
 		};
+
+		StatsManager.instance.upgradesInfo.TryAdd(upgradeGuid, output.UpgradeInfo);
 		
 		_registeredUpgrades.Add(upgradeGuid, output);
 		return output;
