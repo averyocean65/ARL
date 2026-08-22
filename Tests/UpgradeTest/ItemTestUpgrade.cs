@@ -5,7 +5,7 @@ namespace UpgradeTest;
 
 public class ItemTestUpgrade : UpgradeBehaviour {
 	protected override CustomUpgrade GetUpgradeInfo() {
-		return UpgradeManager.Instance.RegisterUpgrade("averyocean65.upgradetest.testone", "Test One");
+		return UpgradeManager.Instance.RegisterOrFetchUpgrade("averyocean65.upgradetest.testone", "Test One");
 	}
 	
 	protected override void PerformUpgrade(bool isInLevel) {

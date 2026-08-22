@@ -35,13 +35,12 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 	}
 	
 	/// <summary>
-	/// Registers an upgrade in the StatsManager.
-	/// Never call this in a frequently called function like implementations of <see cref="UpgradeBehaviour.GetUpgradeInfo()"/>
+	/// Registers or fetches an upgrade in the StatsManager.
 	/// </summary>
 	/// <param name="upgradeGuid">The GUID of the upgrade, recommended format is "author.mod.title"</param>
 	/// <param name="displayName">The name that should show up next to the player map in-game when consuming the upgrade.</param>
 	/// <returns>A structure with all the necessary information regarding the custom upgrade.</returns>
-	public CustomUpgrade RegisterUpgrade(string upgradeGuid, string displayName) {
+	public CustomUpgrade RegisterOrFetchUpgrade(string upgradeGuid, string displayName) {
 		upgradeGuid = $"playerUpgrade_{upgradeGuid}"; // required so R.E.P.O shows the upgrade in the upgrade list... thanks semiwork.
 		
 		if (_registeredUpgrades.TryGetValue(upgradeGuid, out var upgrade)) {

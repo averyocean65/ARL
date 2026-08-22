@@ -7,6 +7,9 @@ using UnityEngine;
 namespace ARL.Upgrades;
 
 public abstract class UpgradeBehaviour : MonoBehaviour {
+	[SerializeField] public string guid = "author.mod.upgrade";
+	[SerializeField] public string displayName = "My Upgrade";
+	
 	protected ItemToggle _toggle;
 	protected ItemUpgrade _itemUpgrade;
 	
@@ -38,7 +41,10 @@ public abstract class UpgradeBehaviour : MonoBehaviour {
 
 		UpgradeManager.PerformUpgrade(steamId, GetUpgradeInfo(), PerformUpgrade);
 	}
+
+	protected virtual CustomUpgrade GetUpgradeInfo() {
+		return UpgradeManager.Instance.RegisterOrFetchUpgrade(guid, displayName);
+	}
 	
-	protected abstract CustomUpgrade GetUpgradeInfo();
 	protected abstract void PerformUpgrade(bool isInLevel);
 }
