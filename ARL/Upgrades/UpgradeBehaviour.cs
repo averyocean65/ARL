@@ -50,5 +50,5 @@ public abstract class UpgradeBehaviour : MonoBehaviour {
 	/// Gets called when an upgrade is applied, or when a new scene is loaded.
 	/// </summary>
 	/// <param name="isInLevel"></param>
-	protected abstract void PerformUpgrade(bool isInLevel);
+	public abstract void PerformUpgrade(bool isInLevel);
 }

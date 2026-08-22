@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using ARL.Utils;
 using HarmonyLib;
+using Steamworks;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.SceneManagement;
@@ -35,8 +36,11 @@ public class UpgradeManager : MonoSingleton<UpgradeManager> {
 				if (!kvp.Key.StartsWith(Constants.UpgradeGuidPrefix)) {
 					continue;
 				}
+
+				int amountForClient = kvp.Value[SteamClient.SteamId.ToString()];
+				ARL.Logger.LogInfo("Upgrade Key: " + kvp.Key + "; Amount owned: " + amountForClient);
 				
-				ARL.Logger.LogInfo("Upgrade Key: " + kvp.Key);
+				// TODO: spawn dummy upgrade and perform upgrades multiple times
 			}
 		};
 	}
