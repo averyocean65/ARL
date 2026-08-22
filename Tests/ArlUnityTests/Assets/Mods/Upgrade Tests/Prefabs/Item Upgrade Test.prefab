@@ -5558,7 +5558,7 @@ GameObject:
   - component: {fileID: 169555536131472689}
   - component: {fileID: 114097119129699119}
   - component: {fileID: 114410747407764720}
-  - component: {fileID: 9098269819706292010}
+  - component: {fileID: 876757170898287617}
   m_Layer: 0
   m_Name: Item Upgrade Test
   m_TagString: Untagged
@@ -6061,7 +6061,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &9098269819706292010
+--- !u!114 &876757170898287617
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6073,6 +6073,8 @@ MonoBehaviour:
   m_Script: {fileID: 902979879, guid: 8e46e783a8560ed478e2f4d180a1dedf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guid: averyocean65.upgradetest.testone
+  displayName: Test Upgrade 1
 --- !u!1 &1531031688256633
 GameObject:
   m_ObjectHideFlags: 0

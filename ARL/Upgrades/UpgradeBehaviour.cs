@@ -7,8 +7,8 @@ using UnityEngine;
 namespace ARL.Upgrades;
 
 public abstract class UpgradeBehaviour : MonoBehaviour {
-	[SerializeField] public string guid = "author.mod.upgrade";
-	[SerializeField] public string displayName = "My Upgrade";
+	public string guid = "author.mod.upgrade";
+	public string displayName = "My Upgrade";
 	
 	protected ItemToggle _toggle;
 	protected ItemUpgrade _itemUpgrade;
